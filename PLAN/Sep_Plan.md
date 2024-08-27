@@ -1,12 +1,12 @@
 # 8월말~ 9월 22일 : 4주간 알고리즘 기초 (BOJ) 
 - 주석을 잘 정리해둔 사람(100위권 안)의 코드를 기준으로 모르는 것을 잘 정리 -> 많은 풀이법을 접하자
-참고 : https://plzrun.tistory.com/entry/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EB%AC%B8%EC%A0%9C%ED%92%80%EC%9D%B4PS-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0
+참고 : `https://plzrun.tistory.com/entry/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EB%AC%B8%EC%A0%9C%ED%92%80%EC%9D%B4PS-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0`
 
 ### 목표 (패캠 + BOJ)
 (1) 패캠
 - 패캠 강의 : 스킵할건 스킵하고 문제 풀이 방식을 중심으로 듣기
 - 패캠 (12주 학습 플래너 기준을 최소 잡기) : 빡센데? (앞부분 스킵할 수 있으면 빠르게 넘기고 문풀에 집중), 
--  https://flint-guppy-e31.notion.site/6a2385deb9c3406bac68dd814da05ec4 
+- ` https://flint-guppy-e31.notion.site/6a2385deb9c3406bac68dd814da05ec4 `
     
 (2) BOJ 문풀
 - BOJ :  APS 문제의 경우, 구현을 테블릿으로 정리하고, 코드 작성(구현 1시간 지나면 다른 사람 코드보기)
