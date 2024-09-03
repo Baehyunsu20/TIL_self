@@ -55,14 +55,15 @@ public class Main {
 		//2. cnt가 n개 이상일때 -> answer = cnt ; return;
 		if(cnt>=n) {
 //			System.out.println("정답 - answer "+answer);
-//			answer = cnt;
+			//직전의 값과 비교.
 			finalans = answer;
 
 			return;
 		}
 		//3. n개보다 작으면 더 작은 값으로 나눠야함.
 		else {
-			recurr(answer-1);
+			//반으로 나누기
+			recurr(answer/2);
 			return;
 		}
 	}
