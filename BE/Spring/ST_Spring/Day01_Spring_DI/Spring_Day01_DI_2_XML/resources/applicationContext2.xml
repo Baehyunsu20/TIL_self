@@ -8,14 +8,19 @@
 
 	<!-- 빈으로 등록하기 위한 작업 (풀패키지명) -->
 	<bean class="com.ssafy.di.Desktop" id="desktop"></bean>
+	<bean class="com.ssafy.di.Laptop" id="laptop"></bean>
 	<!-- 생성자 주입 관련한 생성자가 있어야한다.!!!! -->
 <!-- 	<bean class="com.ssafy.di.Programmer" id="programmer">
 		<constructor-arg ref="desktop"></constructor-arg>
 	</bean> -->
 
-	<!-- 설정자 주입 -->
+	<!-- 설정자 주입 = setter 주입 -->
 	<bean class="com.ssafy.di.Programmer" id="programmer">
-		<property name="computer" ref="desktop"></property>
+	<!-- 동일한 의존성을 두번 넣을 수는 없다. 또한 Bean 하나에는 한개만 넣는게 좋다 -->
+		<!-- <constructor-arg ref="desktop"></constructor-arg> -->
+		
+		<!-- laptop으로 바꿀거면 위에서 laptop을 bean 등록을 해둬야한다. -->
+		<property name="computer" ref="laptop"></property>
 	</bean>
 
 </beans>

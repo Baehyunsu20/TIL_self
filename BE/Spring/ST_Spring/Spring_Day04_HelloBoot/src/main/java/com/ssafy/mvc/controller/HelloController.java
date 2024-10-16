@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HelloController {
 	
-	@GetMapping("/hello")
+	@GetMapping("/hello1")
 	public String hello(Model model){
 		model.addAttribute("msg", "Hello Controller안의 메시지");
-		return "hello"; //앞뒤로 We
+		return "hello"; //return에 들어가는 것은 앞뒤로 prefix와 suffix로 연결된 파일 위치임
 		
 	}
 	
