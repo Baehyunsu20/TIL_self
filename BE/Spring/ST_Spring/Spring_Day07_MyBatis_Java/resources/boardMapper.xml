@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- 내가 연결하고 싶은 Dao의 풀패키지명  -->
+<mapper namespace="com.ssafy.board.model.dao.BoardDao">
+
+	<resultMap type="Board" id="boardMap">
+	<!-- 똑같은 이름은 안써도 됨 -> 알아서 넣어줌 -->
+		<result column="id" property="id"/>
+		<result column="content" property="content"/>
+		<result column="writer" property="writer"/>
+		<result column="title" property="title"/>
+		<result column="reg_date" property="regDate"/>
+		<result column="view_cnt" property="viewCnt"/>
+	
+	
+	</resultMap>
+
+
+	<!-- 전체 게시글 조회 -->
+	<select id="selectAll" resultType="Board">
+	<!-- 일일히 지정하는 방식은 불편 -->
+		SELECT id, content, writer, title, reg_date AS regDate, view_cnt AS viewCnt  FROM board;
+	</select>
+	
+	<!-- 상시 게시글 조회 : 위에서 만든 resultMap을 이용할 때 : id로 가져오기  -->
+	<select id="selectOne" resultMap="boardMap" parameterType="int">
+		select * From board
+		<!-- $와 #의 차이 : 파라미터의 이름이 변형되어도 가능, 
+		하지만 2개 이상이면 map객체를 이용해서 보내거나 dto를 만들거나 -->
+		where id = #{id}
+	
+	</select>
+	
+	<!-- 게시글 등록 : 객체가 들어옴 / 파라미터타입이 들어오는지 파라미터맵이 들어오는지 잘 구분 -->
+	<insert id="insertBoard" parameterType="Board">
+		INSERT INTO board (title, writer, content)
+		<!-- 우리가 작성한 property명과 동일해야함, 
+		아까 id 하나만 들어왔을 경우에는 이름이 달라도 괜찮지만, 여러개면 꼭 같아야함
+		그리고, 컴마 빼먹지 않기 -->
+		VALUES (#{title}, #{writer}, #{content});
+	</insert>
+	
+	
+	<!-- 게시글 삭제 -->
+	<delete id="deleteBoard" parameterType="int">
+		delete FROM board
+		where id = #{id};
+	</delete>
+	
+	
+	<!-- 조회수 증가  -->
+	<update id="updateViewCnt" parameterType="int">
+		UPDATE board
+		SET view_cnt  =view_cnt+1
+		where id =#{id};
+	
+	</update>
+	
+	<!-- 내용업데이트 : 업데이트 수정 날짜를 저장하겠다는 예시  -->
+	<update id="updateBoard" parameterType="Board">
+		UPDATE board
+		SET title=#{title}, content=#{content}, reg_date = now()
+		where id = #{id}
+	
+	
+	</update>
+	
+
+
+
+</mapper>
