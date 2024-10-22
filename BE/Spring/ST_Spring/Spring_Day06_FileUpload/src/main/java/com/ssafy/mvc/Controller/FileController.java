@@ -70,12 +70,36 @@ public class FileController {
 	
 	@GetMapping({"/download"})
 	public String download(@RequestParam("fileName") String filename, Model model) {
-		//다운로드를 처리할 우리만의 view
+		//다운로드를 처리할 우리만의 view -> view resolver?
 		model.addAttribute("filename", filename);
+		// 여기서 이제 자바의 FileDownloadView 감(패키지)
 		return "fileDownloadView";
 
 		
 	}
+	
+	
+	//다중 파일 처리
+	@GetMapping({"/mff"})
+	public String MFileForm() {
+		return "mff";
+
+	}
+	@PostMapping({"/Multiup"})
+	public String MUpload(@RequestParam("files") MultipartFile[] files, Model model) throws IllegalStateException, IOException {
+//		System.out.println(file.getOriginalFilename());//사진 풀네임 출력
+		for(MultipartFile file : files) {
+			System.out.println(file.getOriginalFilename());
+		}
+		return "result";
+
+		
+	}
+	
+	
+	
+	
+	
 	
 
 }
