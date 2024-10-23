@@ -18,6 +18,7 @@
 			</div>
 			<div class="mb-3">
 				<label for="writer" class="form-label">글쓰니</label>
+				<!-- read only로 막아둠 -->
 				<input type="text" class="form-control" id="writer" name="writer" readonly value="${board.writer}">
 			</div>
 			<div class="mb-3">
