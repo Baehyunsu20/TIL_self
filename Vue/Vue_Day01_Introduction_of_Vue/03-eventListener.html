@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue</title>
+  <!-- 1. CDN 추가 : 이거 가져와서 써야하니까 위에 넣는다-->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  
+</head>
+<body>
+  <!-- 아래의 app과 연결을 해줘야함 -->
+  <div id = "app">
+    <button id="btn" v-on:click="increment">{{count}}</button>
+  </div>
+
+  <!-- 10:40분 부터 다시 들어보기 이벤트 리스너와의 비교 -->
+
+  <!--  script -->
+  <script>
+      const { createApp, ref } = Vue;//Vue라는 객체에서 createApp만 가져옴 : 구조분해 할당
+      // 2. 뷰 인스턴스 생성 완료 : 객체 안에 key ,  val을 넣어둠 -> 
+      const app = createApp({
+        setup() {
+          //4. 변수를 사용하지 위해서는 ref  메서드로 감싼다
+          //메서드인데  function 을 안써도 되는 ES6ㅁ문법
+          const count = ref(0)
+          const increment = function () {//함수 표현식(변수에 할당하는식)
+              count.value++ // 꼭 value
+          }
+
+          return {
+            count,
+            increment, //comma를 항상 붙여둬라 -> 없으면 이슈 발생
+          }
+        }
+
+
+      })
+      // 3. DOM과 연결을 하겠다.
+      app.mount("#app");
+  </script>
+  
+</body>
+</html>
