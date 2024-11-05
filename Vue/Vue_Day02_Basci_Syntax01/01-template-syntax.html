@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Vue</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <!-- 바인딩의 기본 콧수염 바인딩 -->
+      <p>{{msg}}</p>
+      <!-- Raw HTML 을 작성해보자 -->
+      <!-- ref안의 구문이 일반 텍스트가 아닌 html 구문이라면 v-html 표지해주기 -->
+      <p>{{rawHTML}}!!</p>
+      <!-- 이렇게 v-html 처리를 해주면 div 안의 텍스트는 안보임
+      그냥 html이 rawhtml로 치환된다고 생각하면 될까? -->
+      <div v-html="rawHTML">@!!!</div>
+      <!-- 속성 바인딩 -->
+      <!-- 내가 ref('')로 설정해둔 아이디가 들어감
+      <div v-bind:id="dynamicId">동적ID</div> : 축약어 생략가능 -->
+      
+      <!-- 콧수염 구문은 html 속성 내에서 사용할 수 없어서 v-bind를 사용 -->
+      <!-- 여기서는 텍스트로 들어가도 되지만, list-${number} -->
+      <div :id="dynamicId">동적ID</div>
+      <!-- 자바스크립트 표현식 -->
+      <!-- 콧수염 구문 안에서 사칙 연산 & 삼항연산을 통한 조건문 가능 -->
+      <p>{{number +1}}</p>
+      <p>{{ok ? 'Yes':'No'}}</p>
+
+      <p>{{msg.split('').reverse().join('')}}</p>
+      <!-- $  달러 표시가 있어여함. 또한 외따가 있어야 뜸
+      왜 외따가 있어야하는데 ? : 쌍따옴표 하나만 있을 경우에는 문자열로 취급됨  -->
+      <p :id="'list-${number}'">동적ID2</p>
+      <p v-if="ok">이거보이나?1</p>
+      <!-- v-show : false 여도 element 창에서 보임, 하지만 if는 아예 안보임 -->
+      <p v-show="ok">이거보이나?2</p>
+      <div>1</div>
+    </div>
+    <script>
+      const { createApp, ref } = Vue;
+
+      const app = createApp({
+        setup() {
+          const msg = ref('Hello Vue!');
+          const rawHTML = ref(
+            '<span style="color:red">이것은 빨강인가요? 3번째줄</span>'
+          );
+          const dynamicId = ref('my-hyunsusuususu');
+          const number = ref(10);
+          const ok = ref(false);
+          return {
+            msg,
+            rawHTML,
+            dynamicId,
+            number,
+            ok,
+          };
+        },
+      });
+      app.mount('#app');
+    </script>
+  </body>
+</html>

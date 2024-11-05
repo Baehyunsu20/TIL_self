@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Vue</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <!-- 그냥  -->
+      <div v-for="p in myArr">{{p.name}} / {{p.age}}</div>
+      <hr />
+      <!-- 순서가 굉장히 중요하다. -> 먼저 들어온 alias가 배열의 요소를 끄집어낸다 -->
+      <div v-for="(p, index) in myArr">{{index}} : {{p.name}} / {{p.age}}</div>
+      <hr />
+      <!-- 객체순회  -->
+      <div v-for="item in myObj">{{item}}</div>
+      <hr />
+      <div v-for="(value, key) in myObj">{{key}} : {{value}}</div>
+      <hr />
+      <!-- 순서가 중요하다!!!!!!!!!!! v, k, idx의 순서르 바꿔서 실험을 해보자 -->
+      <div v-for="(value, key, index) in myObj">{{index}} - {{key}} : {{value}}</div>
+      <hr />
+
+
+      <!-- 2교시 여기서 시작 -->
+      <!-- 여러요소를 동레벨로 반복 돌리고 싶다. 
+      ul 태그가 두번 반복되는지 (v-for의 위치)아니면 그 안의 내용물의 반복되는지 -->
+      <ul>
+        <template v-for="item in myArr">
+          <!-- 세트로 묶어서 반복 -> 위의 템플릿으로 묶어줌. -->
+          <li>{{item.name}}</li>
+          <li>{{item.age}}</li>
+        </template>
+      </ul>
+
+
+      <!--  중첩반복문 -->
+      <hr />
+      <!-- 객체가 하나씩 들어감 -> 여기서는 ul 태그가 2개 만들어짐 -->
+      <ul v-for="item in myInfo">
+        <!-- 한 item이 들어가있고, item안의 요소의 반복 -->
+        <li v-for="friend in item.friends">{{item.name}}는 {{friend}}와 친구입니다.</li>
+      </ul>
+      <!-- 중첩 반복문은 99단 해보기 -->
+    </div>
+    <script>
+      const { createApp, ref } = Vue;
+
+      const app = createApp({
+        setup() {
+          //배열과 객체의 차이
+          const myArr = ref([
+            { name: "Alice", age: 20 },
+            { name: "Bella", age: 21 },
+          ]);
+          const myObj = ref({
+            name: "Cathy",
+            age: 30,
+          });
+
+          // nested v-for
+          const myInfo = ref([
+            { name: "Alice", age: 20, friends: ["Bella", "Cathy", "Dan"] },
+            { name: "Bella", age: 21, friends: ["Alice", "Cathy"] },
+          ]);
+
+          return {
+            myArr,
+            myObj,
+            myInfo,
+          };
+        },
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>

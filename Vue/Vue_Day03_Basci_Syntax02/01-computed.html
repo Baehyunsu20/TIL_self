@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Vue</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+
+  <body>
+    <div id="app"></div>
+    <h2>남은 할일</h2>
+    <!-- 이 내용을 스크립트에 넣기 위해 computed를 사용 -->
+    <p>{{todos.length > 0 ? '공부해':'퇴근'}}</p>
+    <script>
+      const { createApp, ref } = Vue;
+
+      const app = createApp({
+        setup() {
+          const todos = ref([
+            {Text:"공부하기1"},
+            {Text:"공부하기2"},
+            {Text:"공부하기3"},
+            
+
+          ])
+
+          //computed와 function은 같아 보임.
+          //하지만 computed는 console.log를 여러번해도 한번만 출력돤
+          // = computed 속성은 의존된 반응형 데이터를 기반으로 캐시(임시저장소)된다
+          // computed는 의존된 데이터가 변하면 자동으로 업데이트
+          // method는 호출해야만 업데이트 
+
+          return {
+            todos,
+          };
+        },
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>

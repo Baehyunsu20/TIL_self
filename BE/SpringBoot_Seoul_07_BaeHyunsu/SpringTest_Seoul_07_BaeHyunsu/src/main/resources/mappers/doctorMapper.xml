@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.exam.model.dao.DoctorDao">
+
+<!-- 3.1 의사정보 등록 -->
+<insert id="insertDoctor" parameterType="Doctor">
+INSERT INTO doctor (doctor_id, name, age, specialty_code, experience_years)
+VALUES (#{doctorId}, #{name}, #{age}, #{specialtyCode}, #{experienceYears});
+</insert>
+
+<!-- 3.2 의사 전체 정보 조회 : specialty 테이블과 Join -->
+<select id="selectAllDoctors" resultType="Doctor">
+<!-- join하여 dto에 맞는 이름으로 가져옴 -->
+SELECT d.doctor_id doctorId, d.name name, d.age age, d.specialty_code specialtyCode, d.experience_years experienceYears , s.specialty_name specialtyName
+FROM specialty s, doctor d
+where s.specialty_code=d.specialty_code;
+</select>
+
+<!-- 3.3 의사 개인 정보 조회(입력받은 id로 조회 -> where에 조건 추가)-->
+<select id="selectDoctorById" parameterType="int" resultType="Doctor">
+<!-- join하여 dto에 맞는 이름으로 가져옴 -->
+SELECT d.doctor_id doctorId, d.name name, d.age age, d.specialty_code specialtyCode, d.experience_years experienceYears , s.specialty_name specialtyName
+FROM specialty s, doctor d
+where (s.specialty_code=d.specialty_code) AND (id=#{doctorId});
+</select>
+
+<!-- 3.4 의사 개인정보 삭제 -->
+<delete id="deleteDoctor"  parameterType="int">
+DELETE FROM doctor
+where id=#{doctorId};
+</delete>
+
+<!-- 3.5 의사 정보 수정   -->
+<update id="updateDoctor" parameterType="Doctor">
+UPDATE doctor
+SET #{doctor_id}, #{name}, #{age}, #{specialty_code}, #{experience_years}
+where doctorId=#{id}; 
+</update>
+
+
+</mapper>
