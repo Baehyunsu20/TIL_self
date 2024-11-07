@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace 설정하고, 이제 그 안에 설정 -->
+<mapper namespace="com.ssafy.mvc.model.dao.UserDao">
+
+
+<!-- 이제 Dao와 sql연결해야함 :3가지  -->
+
+<!-- selectOne-->
+<select id="selectOne" parameterType="Map" resultType="User" >
+<!-- Map을 통해 id와 pw가 들어옴 -->
+SELECT id, name
+FROM users
+WHERE id=#{id} AND password=#{password}
+
+</select>
+
+<!-- selectAll  -->
+<select id="selectAll" resultType="User">
+<!-- 조인이 들어감 : 커리큘럼의 이름이 들어가야함 -->
+SELECT u.id id, u.password password, u.name name, c.name curriculumName
+FROM users u
+JOIN curriculum c ON u.curriculum_code = c.code
+
+<!-- 
+SELECT u.id id u.password password u.name name c.name curriculumName
+FROM users u, curriculum c
+Where u.curriculm_code = c.code
+
+ -->
+
+</select>
+
+<!-- insertUser : 이건 왜 구현 안해뒀지?  -->
+
+
+
+
+
+
+</mapper>
